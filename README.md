@@ -1,4 +1,7 @@
-### mama, moto?
+# Who am I?
+Software engineer since 2015, driven by the belief that code can transform our world for the better. I thrive on taking ideas from concept to reality, making solutions accessible to everyone.
+
+Passionate about exploring new technologies and solving complex challenges through collaboration. While fluent in Ruby and JavaScript, I’m always eager to expand my knowledge, experiment with new languages, and embrace different programming paradigms.
 <!--
 **amcamargoc/amcamargoc** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
 
