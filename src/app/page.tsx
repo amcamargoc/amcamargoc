@@ -5,7 +5,6 @@ import DashboardView from "@/components/dashboard/DashboardView";
 import ProjectsView from "@/components/views/ProjectsView";
 import BioView from "@/components/views/BioView";
 import ExperienceView from "@/components/views/ExperienceView";
-import LspNotification from "@/components/ui/LspNotification";
 import { useAppStore } from "@/store/useAppStore";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -55,7 +54,6 @@ export default function Home() {
           </motion.div>
         </AnimatePresence>
       </div>
-      <LspNotification />
     </Shell>
   );
 }
