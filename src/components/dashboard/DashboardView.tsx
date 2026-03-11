@@ -1,6 +1,5 @@
 import AsciiLogo from "./AsciiLogo";
 import InteractiveMenu from "./InteractiveMenu";
-import ActivePreview from "./ActivePreview";
 
 export default function DashboardView() {
   return (
@@ -8,7 +7,6 @@ export default function DashboardView() {
       <AsciiLogo />
       <div className="w-full max-w-xl space-y-6 flex flex-col items-center">
         <InteractiveMenu />
-        <ActivePreview />
       </div>
     </div>
   );

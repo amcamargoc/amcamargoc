@@ -13,8 +13,8 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alberto Camargo | Neovim TUI",
-  description: "Minimal, futuristic, dark mode developer portfolio",
+  title: "Alberto Mario Camargo Castro",
+  description: "developer portfolio",
 };
 
 export default function RootLayout({
