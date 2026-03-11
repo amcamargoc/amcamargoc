@@ -22,9 +22,6 @@ export default function BioView() {
           <p>
             I thrive on taking ideas from concept to reality, making solutions accessible to everyone. Passionate about exploring new technologies and solving complex challenges through collaboration.
           </p>
-          <p>
-            While fluent in <span className="text-tui-magenta font-mono font-bold">Ruby</span> and <span className="text-tui-cyan font-mono font-bold">JavaScript</span>, I’m always eager to expand my knowledge, experiment with new languages, and embrace different programming paradigms.
-          </p>
         </div>
 
         <div className="pt-8 border-t border-tui-gray grid grid-cols-1 md:grid-cols-2 gap-8">
