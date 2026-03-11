@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tui-bg: #000000;
+  --color-tui-cyan: #00ffff;
+  --color-tui-magenta: #ff00ff;
+  --color-tui-gray: #333333;
+  --color-tui-dim: #666666;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-tui-bg);
+    color: #ffffff;
+    font-family: var(--font-mono);
+  }
+}
+
+.ascii-art {
+  line-height: 1.1;
+  white-space: pre;
+}
+
+.cursor-block {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background: var(--color-tui-cyan);
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #000;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #333;
+}
