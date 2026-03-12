@@ -27,6 +27,22 @@ export default function DashboardView() {
         <div className="w-full flex justify-center">
           <InteractiveMenu />
         </div>
+
+        {/* Shortcut hints */}
+        <div className="mt-20 pt-8 border-t border-tui-gray/20 w-full max-w-sm flex flex-wrap justify-center gap-x-6 gap-y-2">
+          <div className="text-[10px] font-mono whitespace-nowrap">
+            <span className="text-tui-magenta mr-2">ALT+1-9</span>
+            <span className="text-tui-dim">NAVIGATE</span>
+          </div>
+          <div className="text-[10px] font-mono whitespace-nowrap">
+            <span className="text-tui-magenta mr-2">ALT+H/L</span>
+            <span className="text-tui-dim">PREV/NEXT</span>
+          </div>
+          <div className="text-[10px] font-mono whitespace-nowrap">
+            <span className="text-tui-magenta mr-2">ALT+X</span>
+            <span className="text-tui-dim">CLOSE TAB</span>
+          </div>
+        </div>
       </div>
     </div>
   );

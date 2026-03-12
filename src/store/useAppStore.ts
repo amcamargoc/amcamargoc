@@ -48,9 +48,12 @@ export const useAppStore = create<AppState>((set) => ({
 
   closeTab: (id) =>
     set((state) => {
+      // Prevent closing the dashboard tab
+      if (id === "tab-dashboard") return state;
+
       const newTabs = state.tabs.filter((t) => t.id !== id);
 
-      // Ensure at least one tab is open (revert to dashboard if empty)
+      // Ensure at least one tab is open (revert to dashboard if empty - safeguard)
       if (newTabs.length === 0) {
         return { tabs: [DEFAULT_TAB], activeTabId: DEFAULT_TAB.id };
       }

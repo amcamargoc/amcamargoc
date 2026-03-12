@@ -40,17 +40,17 @@ export default function InteractiveMenu() {
     <div className="flex flex-col items-center gap-8 w-full max-w-sm">
       <Section title="NAVIGATION">
         <MenuItem
-          index="e"
+          index="B"
           label="Bio"
           action={() => openTab({ type: "bio", title: "bio.md", path: "/humans/character/beto/bio.md" })}
         />
         <MenuItem
-          index="f"
+          index="P"
           label="Projects"
           action={() => openTab({ type: "projects", title: "index.md", path: "/humans/character/beto/projects/index.md" })}
         />
         <MenuItem
-          index="r"
+          index="E"
           label="Experience"
           action={() => openTab({ type: "experience", title: "experience.md", path: "/humans/character/beto/experience.md" })}
         />

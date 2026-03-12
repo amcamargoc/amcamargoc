@@ -78,9 +78,9 @@ export default function Sidebar() {
 
       <div className="flex-1 p-2 text-[12px] overflow-y-auto custom-scrollbar min-w-[260px]">
         <ul className="space-y-[2px] font-medium w-full">
-          {/* Root Folder: /humans/character/beto/ */}
+          {/* Root Folder: /humans/characters/beto/ */}
           <FolderItem
-            title="/humans/character/beto/"
+            title="/humans/characters/beto/"
             isOpen={betoExpanded}
             toggle={() => setBetoExpanded(!betoExpanded)}
             isRoot={true}
