@@ -17,7 +17,7 @@ export default function Home() {
       case "dashboard":
         return <DashboardView />;
       case "projects":
-        return <ProjectsView />;
+        return <ProjectsView activeTab={activeTab} />;
       case "bio":
         return <BioView />;
       case "experience":

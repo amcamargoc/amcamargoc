@@ -6,6 +6,7 @@ export interface Tab {
   id: string;
   type: ViewType;
   title: string;
+  path: string;
 }
 
 interface AppState {
@@ -15,13 +16,13 @@ interface AppState {
   openTab: (tab: Omit<Tab, "id">) => void;
   closeTab: (id: string) => void;
   setActiveTab: (id: string) => void;
-  toggleSidebar: () => void;
 }
 
 const DEFAULT_TAB: Tab = {
   id: "tab-dashboard",
   type: "dashboard",
-  title: "dashboard",
+  title: "index.md",
+  path: "/humans/character/beto/index.md",
 };
 
 export const useAppStore = create<AppState>((set) => ({
@@ -31,8 +32,8 @@ export const useAppStore = create<AppState>((set) => ({
 
   openTab: (tabData) =>
     set((state) => {
-      // Check if tab with same type already exists
-      const existingTab = state.tabs.find((t) => t.type === tabData.type);
+      // Check if tab with same path already exists
+      const existingTab = state.tabs.find((t) => t.path === tabData.path);
       if (existingTab) {
         return { activeTabId: existingTab.id };
       }
@@ -49,7 +50,7 @@ export const useAppStore = create<AppState>((set) => ({
     set((state) => {
       const newTabs = state.tabs.filter((t) => t.id !== id);
 
-      // Ensure at least dashboard is open
+      // Ensure at least one tab is open (revert to dashboard if empty)
       if (newTabs.length === 0) {
         return { tabs: [DEFAULT_TAB], activeTabId: DEFAULT_TAB.id };
       }
@@ -64,6 +65,4 @@ export const useAppStore = create<AppState>((set) => ({
     }),
 
   setActiveTab: (id) => set({ activeTabId: id }),
-
-  toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 }));
