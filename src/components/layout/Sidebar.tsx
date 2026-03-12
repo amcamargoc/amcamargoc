@@ -5,14 +5,22 @@ import { Folder, FileText, ChevronRight, ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export default function Sidebar() {
-  const { sidebarOpen, openTab, toggleSidebar } = useAppStore();
-  const [projectsOpen, setProjectsOpen] = useState(true);
+  const { sidebarOpen, openTab, toggleSidebar, activeTabId, tabs } = useAppStore();
+  const [projectsExpanded, setProjectsExpanded] = useState(true);
 
-  if (!sidebarOpen) return null;
+  // Helper to determine if a file is active based on its title
+  const isActive = (title: string) => {
+    const activeTab = tabs.find((t) => t.id === activeTabId);
+    return activeTab?.title === title;
+  };
 
   return (
-    <aside className="w-64 border-r border-tui-gray flex flex-col shrink-0 bg-black hidden md:flex h-full">
-      <div className="p-3 text-tui-cyan text-xs flex items-center gap-2 border-b border-tui-gray shrink-0">
+    <aside
+      className={`border-r border-tui-gray flex flex-col shrink-0 bg-black h-full transition-[width] duration-200 ease-in-out ${
+        sidebarOpen ? "w-[260px]" : "w-0 border-r-0"
+      } overflow-hidden`}
+    >
+      <div className="p-3 text-tui-cyan text-xs flex items-center gap-2 border-b border-tui-gray shrink-0 min-w-[260px]">
         <Folder size={12} className="shrink-0" />
         <span className="font-bold">EXPLORER</span>
         <button
@@ -23,85 +31,114 @@ export default function Sidebar() {
         </button>
       </div>
 
-      <div className="flex-1 p-2 text-[12px] space-y-1 overflow-y-auto custom-scrollbar">
-        <div className="flex items-center gap-2 text-tui-magenta mb-2">
+      <div className="flex-1 p-2 text-[12px] overflow-y-auto custom-scrollbar min-w-[260px]">
+        <div className="flex items-center gap-2 text-tui-magenta mb-2 px-2">
           <ChevronDown size={14} className="shrink-0" />
           <span className="font-bold">/root</span>
         </div>
 
-        <div className="pl-4 space-y-1 font-medium">
+        <ul className="space-y-[2px] font-medium w-full">
           {/* Bio File */}
-          <div
-            className="group flex items-center gap-2 text-tui-cyan cursor-pointer hover:text-white transition-colors"
-            onClick={() => openTab({ type: "bio", title: "bio.md" })}
-          >
-            <span className="text-tui-dim group-hover:text-tui-cyan">├─</span>
-            <FileText size={12} className="shrink-0 opacity-70 group-hover:opacity-100" />
-            <span>bio.md</span>
-          </div>
+          <li>
+            <button
+              className={`w-full flex items-center gap-2 px-2 py-1 rounded-sm cursor-pointer transition-colors ${
+                isActive("bio.md")
+                  ? "bg-white/10 text-white"
+                  : "text-tui-cyan hover:bg-white/5 hover:text-white"
+              }`}
+              onClick={() => openTab({ type: "bio", title: "bio.md" })}
+            >
+              <FileText size={12} className={`shrink-0 ${isActive("bio.md") ? "opacity-100" : "opacity-70"}`} />
+              <span>bio.md</span>
+            </button>
+          </li>
 
           {/* Projects Folder */}
-          <div>
-            <div
-              className="group flex items-center gap-2 text-tui-magenta cursor-pointer hover:text-white transition-colors"
-              onClick={() => setProjectsOpen(!projectsOpen)}
+          <li>
+            <button
+              className="w-full flex items-center gap-2 px-2 py-1 rounded-sm text-tui-magenta cursor-pointer hover:bg-white/5 hover:text-white transition-colors"
+              onClick={() => setProjectsExpanded(!projectsExpanded)}
             >
-              <span className="text-tui-dim group-hover:text-tui-magenta">├─</span>
-              {projectsOpen ? <ChevronDown size={12} /> : <ChevronRight size={12} />}
-              <Folder size={12} className="shrink-0 opacity-70 group-hover:opacity-100" />
+              {projectsExpanded ? <ChevronDown size={12} className="shrink-0" /> : <ChevronRight size={12} className="shrink-0" />}
+              <Folder size={12} className="shrink-0 opacity-70" />
               <span>projects</span>
-            </div>
+            </button>
 
-            {projectsOpen && (
-              <div className="pl-6 space-y-1 mt-1">
-                <div
-                  className="flex items-center gap-2 text-tui-dim hover:text-white cursor-pointer transition-colors"
-                  onClick={() => openTab({ type: "projects", title: "portfolio.ts" })}
-                >
-                  <span>│  ├─</span>
-                  <FileText size={10} className="shrink-0" />
-                  <span>portfolio.ts</span>
-                </div>
-                <div
-                  className="flex items-center gap-2 text-tui-dim hover:text-white cursor-pointer transition-colors"
-                  onClick={() => openTab({ type: "projects", title: "mokoa.tsx" })}
-                >
-                  <span>│  ├─</span>
-                  <FileText size={10} className="shrink-0" />
-                  <span>mokoa.tsx</span>
-                </div>
-                <div
-                  className="flex items-center gap-2 text-tui-dim hover:text-white cursor-pointer transition-colors"
-                  onClick={() => openTab({ type: "projects", title: "cosmic.ts" })}
-                >
-                  <span>│  └─</span>
-                  <FileText size={10} className="shrink-0" />
-                  <span>cosmic.ts</span>
-                </div>
-              </div>
+            {projectsExpanded && (
+              <ul className="space-y-[2px] mt-[2px] w-full">
+                <li>
+                  <button
+                    className={`w-full flex items-center gap-2 pl-8 pr-2 py-1 rounded-sm cursor-pointer transition-colors ${
+                      isActive("portfolio.ts")
+                        ? "bg-white/10 text-white"
+                        : "text-tui-dim hover:bg-white/5 hover:text-white"
+                    }`}
+                    onClick={() => openTab({ type: "projects", title: "portfolio.ts" })}
+                  >
+                    <FileText size={12} className="shrink-0" />
+                    <span>portfolio.ts</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={`w-full flex items-center gap-2 pl-8 pr-2 py-1 rounded-sm cursor-pointer transition-colors ${
+                      isActive("mokoa.tsx")
+                        ? "bg-white/10 text-white"
+                        : "text-tui-dim hover:bg-white/5 hover:text-white"
+                    }`}
+                    onClick={() => openTab({ type: "projects", title: "mokoa.tsx" })}
+                  >
+                    <FileText size={12} className="shrink-0" />
+                    <span>mokoa.tsx</span>
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={`w-full flex items-center gap-2 pl-8 pr-2 py-1 rounded-sm cursor-pointer transition-colors ${
+                      isActive("cosmic.ts")
+                        ? "bg-white/10 text-white"
+                        : "text-tui-dim hover:bg-white/5 hover:text-white"
+                    }`}
+                    onClick={() => openTab({ type: "projects", title: "cosmic.ts" })}
+                  >
+                    <FileText size={12} className="shrink-0" />
+                    <span>cosmic.ts</span>
+                  </button>
+                </li>
+              </ul>
             )}
-          </div>
+          </li>
 
           {/* Experience File */}
-          <div
-            className="group flex items-center gap-2 text-tui-cyan cursor-pointer hover:text-white transition-colors mt-1"
-            onClick={() => openTab({ type: "experience", title: "experience.log" })}
-          >
-            <span className="text-tui-dim group-hover:text-tui-cyan">├─</span>
-            <FileText size={12} className="shrink-0 opacity-70 group-hover:opacity-100" />
-            <span>experience.log</span>
-          </div>
+          <li>
+            <button
+              className={`w-full flex items-center gap-2 px-2 py-1 rounded-sm cursor-pointer transition-colors ${
+                isActive("experience.log")
+                  ? "bg-white/10 text-white"
+                  : "text-tui-cyan hover:bg-white/5 hover:text-white"
+              }`}
+              onClick={() => openTab({ type: "experience", title: "experience.log" })}
+            >
+              <FileText size={12} className={`shrink-0 ${isActive("experience.log") ? "opacity-100" : "opacity-70"}`} />
+              <span>experience.log</span>
+            </button>
+          </li>
 
           {/* Init File */}
-          <div
-            className="group flex items-center gap-2 text-tui-cyan cursor-pointer hover:text-white transition-colors"
-            onClick={() => openTab({ type: "dashboard", title: "init.lua" })}
-          >
-            <span className="text-tui-dim group-hover:text-tui-cyan">└─</span>
-            <FileText size={12} className="shrink-0 opacity-70 group-hover:opacity-100" />
-            <span>init.lua</span>
-          </div>
-        </div>
+          <li>
+            <button
+              className={`w-full flex items-center gap-2 px-2 py-1 rounded-sm cursor-pointer transition-colors ${
+                isActive("init.lua")
+                  ? "bg-white/10 text-white"
+                  : "text-tui-cyan hover:bg-white/5 hover:text-white"
+              }`}
+              onClick={() => openTab({ type: "dashboard", title: "init.lua" })}
+            >
+              <FileText size={12} className={`shrink-0 ${isActive("init.lua") ? "opacity-100" : "opacity-70"}`} />
+              <span>init.lua</span>
+            </button>
+          </li>
+        </ul>
       </div>
     </aside>
   );
