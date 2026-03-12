@@ -1,36 +1,41 @@
 import { Briefcase, Code, Database, Globe } from "lucide-react";
+import { Tab } from "@/store/useAppStore";
 
-export default function ProjectsView() {
+export default function ProjectsView({ activeTab }: { activeTab: Tab }) {
   const projects = [
     {
-      name: "mokoa.tsx",
+      name: "muikao.md",
       desc: "Digital Asset Ecosystem with Real-Time Analytics.",
       stack: ["React", "Node", "AWS"],
       icon: <Globe size={18} className="text-tui-cyan" />,
       color: "border-tui-cyan",
     },
     {
-      name: "cosmic.ts",
+      name: "the_cosmic_games.md",
       desc: "High-performance physics engine for web applications.",
       stack: ["TypeScript", "WebGL", "WASM"],
       icon: <Code size={18} className="text-tui-magenta" />,
       color: "border-tui-magenta",
     },
     {
-      name: "portfolio.ts",
-      desc: "Neovim TUI inspired developer portfolio.",
-      stack: ["Next.js", "Tailwind", "Zustand"],
+      name: "führerschein_fragen.md",
+      desc: "Interactive learning platform for driving licenses.",
+      stack: ["Next.js", "Tailwind", "Supabase"],
       icon: <Briefcase size={18} className="text-white" />,
       color: "border-tui-gray hover:border-white",
     },
     {
-      name: "data_layer.go",
-      desc: "Distributed caching system for microservices.",
-      stack: ["Golang", "Redis", "gRPC"],
-      icon: <Database size={18} className="text-tui-dim" />,
-      color: "border-tui-gray hover:border-tui-dim",
+      name: "portfolio_v2.md",
+      desc: "Neovim TUI inspired developer portfolio.",
+      stack: ["Next.js", "Tailwind", "Zustand"],
+      icon: <Terminal size={18} className="text-white" />,
+      color: "border-tui-gray hover:border-white",
     },
   ];
+
+  const displayedProjects = activeTab.path.endsWith("projects/index.md")
+    ? projects
+    : projects.filter(p => activeTab.path.endsWith(p.name));
 
   return (
     <div className="flex-1 overflow-y-auto p-6 md:p-12 custom-scrollbar">
@@ -40,12 +45,15 @@ export default function ProjectsView() {
             <span className="text-tui-dim">~/</span>
             projects
             <span className="text-tui-dim">/</span>
+            {!activeTab.path.endsWith("index.md") && (
+              <span className="text-white">{activeTab.title}</span>
+            )}
           </h1>
           <p className="text-tui-dim mt-2 lowercase">ls -la --color=auto</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {projects.map((p, i) => (
+          {displayedProjects.map((p, i) => (
             <div
               key={i}
               className={`border ${p.color} bg-black p-5 rounded-sm transition-all duration-300 hover:bg-white/5 cursor-pointer group`}
@@ -72,3 +80,5 @@ export default function ProjectsView() {
     </div>
   );
 }
+
+import { Terminal } from "lucide-react";
