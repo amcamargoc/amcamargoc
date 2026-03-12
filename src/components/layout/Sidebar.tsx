@@ -88,7 +88,7 @@ export default function Sidebar() {
 
           {betoExpanded && (
             <ul className="relative ml-4 border-l border-tui-gray/60 space-y-[2px]">
-              <NavItem title="index.md" path="/humans/character/beto/index.md" type="dashboard" icon={FileText} level={0} />
+              <NavItem title="index.md" path="/humans/characters/beto/index.md" type="dashboard" icon={FileText} level={0} />
 
               {/* Projects Folder */}
               <FolderItem
@@ -100,15 +100,15 @@ export default function Sidebar() {
 
               {projectsExpanded && (
                 <ul className="relative ml-4 border-l border-tui-gray/60 space-y-[2px]">
-                  <NavItem title="index.md" path="/humans/character/beto/projects/index.md" type="projects" icon={FileText} level={0} />
-                  <NavItem title="muikao.md" path="/humans/character/beto/projects/muikao.md" type="projects" icon={FileText} level={0} />
-                  <NavItem title="führerschein_fragen.md" path="/humans/character/beto/projects/führerschein_fragen.md" type="projects" icon={FileText} level={0} />
-                  <NavItem title="the_cosmic_games.md" path="/humans/character/beto/projects/the_cosmic_games.md" type="projects" icon={FileText} level={0} />
+                  <NavItem title="index.md" path="/humans/characters/beto/projects/index.md" type="projects" icon={FileText} level={0} />
+                  <NavItem title="muikao.md" path="/humans/characters/beto/projects/muikao.md" type="projects" icon={FileText} level={0} />
+                  <NavItem title="führerschein_fragen.md" path="/humans/characters/beto/projects/führerschein_fragen.md" type="projects" icon={FileText} level={0} />
+                  <NavItem title="the_cosmic_games.md" path="/humans/characters/beto/projects/the_cosmic_games.md" type="projects" icon={FileText} level={0} />
                 </ul>
               )}
 
-              <NavItem title="bio.md" path="/humans/character/beto/bio.md" type="bio" icon={FileText} level={0} />
-              <NavItem title="experience.md" path="/humans/character/beto/experience.md" type="experience" icon={FileText} level={0} />
+              <NavItem title="bio.md" path="/humans/characters/beto/bio.md" type="bio" icon={FileText} level={0} />
+              <NavItem title="experience.md" path="/humans/characters/beto/experience.md" type="experience" icon={FileText} level={0} />
             </ul>
           )}
         </ul>
