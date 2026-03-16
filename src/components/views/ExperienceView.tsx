@@ -1,66 +1,49 @@
 "use client";
 
-import { GitCommitHorizontal, Clock, Building2, TerminalSquare, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { GitCommitHorizontal, Clock, Building2, TerminalSquare } from "lucide-react";
+import { useState } from "react";
+import profileData from "@/data/profile-data.json";
 
 export default function ExperienceView() {
-  const [experiences, setExperiences] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/profile")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.experienceRaw && data.experienceRaw.length > 0) {
-          setExperiences([
-            {
-              role: "PDF Experience Export",
-              company: "LinkedIn",
-              date: "Latest",
-              textRaw: data.experienceRaw.map((e: any) => e.text).join('\n'),
-              color: "text-tui-cyan"
-            }
-          ]);
-        } else {
-          setExperiences([
-            {
-              role: "Senior Full Stack Engineer",
-              company: "TechNova Solutions",
-              date: "2021 - Present",
-              desc: "Led the architectural redesign of the core product platform, transitioning from a monolithic Ruby on Rails application to a microservices architecture using Node.js and Next.js.",
-              color: "text-tui-cyan"
-            },
-            {
-              role: "Software Engineer II",
-              company: "DataSphere Analytics",
-              date: "2018 - 2021",
-              desc: "Developed high-performance data visualization dashboards using React and D3.js. Improved query performance by 40% through advanced PostgreSQL indexing strategies.",
-              color: "text-tui-magenta"
-            },
-            {
-              role: "Backend Developer",
-              company: "CloudSync Inc.",
-              date: "2015 - 2018",
-              desc: "Built scalable RESTful APIs using Ruby on Rails for a document management system serving over 100k daily active users.",
-              color: "text-white"
-            }
-          ]);
+  const getInitialExperiences = () => {
+    const data = profileData as any;
+    if (data.experienceRaw && data.experienceRaw.length > 0) {
+      return [
+        {
+          role: "PDF Experience Export",
+          company: "LinkedIn",
+          date: "Latest",
+          textRaw: data.experienceRaw.map((e: any) => e.text).join('\n'),
+          color: "text-tui-cyan"
         }
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Failed to load experience:", err);
-        setLoading(false);
-      });
-  }, []);
+      ];
+    }
+    return [
+      {
+        role: "Senior Full Stack Engineer",
+        company: "TechNova Solutions",
+        date: "2021 - Present",
+        desc: "Led the architectural redesign of the core product platform, transitioning from a monolithic Ruby on Rails application to a microservices architecture using Node.js and Next.js.",
+        color: "text-tui-cyan"
+      },
+      {
+        role: "Software Engineer II",
+        company: "DataSphere Analytics",
+        date: "2018 - 2021",
+        desc: "Developed high-performance data visualization dashboards using React and D3.js. Improved query performance by 40% through advanced PostgreSQL indexing strategies.",
+        color: "text-tui-magenta"
+      },
+      {
+        role: "Backend Developer",
+        company: "CloudSync Inc.",
+        date: "2015 - 2018",
+        desc: "Built scalable RESTful APIs using Ruby on Rails for a document management system serving over 100k daily active users.",
+        color: "text-white"
+      }
+    ];
+  };
 
-  if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center h-full">
-        <Loader2 className="animate-spin text-tui-cyan" size={32} />
-      </div>
-    );
-  }
+  const [experiences] = useState<any[]>(getInitialExperiences());
 
   return (
     <div className="flex-1 overflow-y-auto p-6 md:p-12 custom-scrollbar">

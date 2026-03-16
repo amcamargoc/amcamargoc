@@ -33,30 +33,10 @@ const getIconSvg = (language: string) => {
   return icon ? icon.svg : null;
 };
 
+import profileData from "@/data/profile-data.json";
+
 export default function BioView() {
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/profile")
-      .then((res) => res.json())
-      .then((resData) => {
-        setData(resData);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="flex-1 flex items-center justify-center h-full">
-        <Loader2 className="animate-spin text-tui-cyan" size={32} />
-      </div>
-    );
-  }
+  const [data] = useState<any>(profileData);
 
   const profile = data?.profile;
   const techStack = data?.techStack || ['TypeScript / Node.js', 'React / Next.js', 'Ruby on Rails', 'PostgreSQL / Redis'];

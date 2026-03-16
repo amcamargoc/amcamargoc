@@ -1,16 +1,12 @@
-export const dynamic = 'force-dynamic';
-export const runtime = 'nodejs';
-
-import { NextResponse } from 'next/server';
-import path from 'path';
 import fs from 'fs';
+import path from 'path';
 import PDFParser from 'pdf2json';
 
-export async function GET() {
+async function generateProfileData() {
+    console.log('--- Generating Profile Data ---');
     try {
         // 1. Fetch GitHub Profile
         const profileRes = await fetch('https://api.github.com/users/amcamargoc', {
-            next: { revalidate: 3600 },
             headers: { Accept: 'application/vnd.github.v3+json' },
         });
 
@@ -22,13 +18,12 @@ export async function GET() {
 
         // 2. Fetch Repositories to calculate Language Tech Stack
         const reposRes = await fetch('https://api.github.com/users/amcamargoc/repos?per_page=100&sort=updated', {
-            next: { revalidate: 3600 },
             headers: { Accept: 'application/vnd.github.v3+json' },
         });
 
         const languagesMap: Record<string, number> = {};
         if (reposRes.ok) {
-            const repos = await reposRes.json();
+            const repos = await reposRes.json() as any[];
             repos.forEach((repo: any) => {
                 if (repo.language) {
                     languagesMap[repo.language] = (languagesMap[repo.language] || 0) + 1;
@@ -62,10 +57,7 @@ export async function GET() {
         }
 
         if (Object.keys(extractedMetadata).length === 0) {
-            const metadataRes = await fetch('https://raw.githubusercontent.com/amcamargoc/amcamargoc/main/metadata.json', {
-                cache: 'no-store',
-            });
-
+            const metadataRes = await fetch('https://raw.githubusercontent.com/amcamargoc/amcamargoc/main/metadata.json');
             if (metadataRes.ok) {
                 extractedMetadata = await metadataRes.json();
             }
@@ -76,20 +68,17 @@ export async function GET() {
         try {
             const pdfPath = path.join(process.cwd(), 'public', 'linkedin_profile.pdf');
             if (fs.existsSync(pdfPath)) {
-                // @ts-ignore - The typings for pdf2json are outdated in strict mode 
-                const pdfParser = new PDFParser(null, 1); // 1 = returns raw text content
+                const pdfParser = new PDFParser(null, true);
 
                 const pdfText = await new Promise<string>((resolve, reject) => {
-                    pdfParser.on("pdfParser_dataError", (errData: any) => reject(errData.parserError));
+                    pdfParser.on("pdfParser_dataError", (errData: any) => reject(errData.parserError || errData));
                     pdfParser.on("pdfParser_dataReady", () => {
                         resolve(pdfParser.getRawTextContent());
                     });
                     pdfParser.loadPDF(pdfPath);
                 });
 
-                // Clean the raw text by replacing the weird carriage return artifacts from pdf2json
                 const cleanText = pdfText.replace(/\r\n/g, '\n');
-
                 const expIndex = cleanText.indexOf("Experience");
                 const eduIndex = cleanText.indexOf("Education");
 
@@ -99,22 +88,18 @@ export async function GET() {
                         eduIndex !== -1 ? eduIndex : cleanText.length
                     );
 
-                    // Split and trim
                     const lines = experienceChunk.split('\n').map((l: string) => l.trim()).filter(Boolean);
-
                     experienceData = lines.map((line: string, i: number) => ({
                         id: i,
                         text: line
                     }));
                 }
-            } else {
-                console.warn("linkedin_profile.pdf not found in public folder. Skipping PDF parse.");
             }
         } catch (pdfErr) {
             console.error("Error parsing PDF:", pdfErr);
         }
 
-        const response = NextResponse.json({
+        const finalData = {
             profile: {
                 name: profileData.name || 'ALBERTO CAMARGO',
                 bio: profileData.bio || '',
@@ -124,15 +109,17 @@ export async function GET() {
             techStack: topLanguages.length > 0 ? topLanguages : ['TypeScript', 'React', 'Node.js'],
             metadata: extractedMetadata,
             experienceRaw: experienceData,
-        });
+            generatedAt: new Date().toISOString()
+        };
 
-        response.headers.set('Cache-Control', 'no-store, max-age=0');
-        return response;
+        const outputPath = path.join(process.cwd(), 'src', 'data', 'profile-data.json');
+        fs.writeFileSync(outputPath, JSON.stringify(finalData, null, 2));
+        console.log(`Successfully generated profile data to: ${outputPath}`);
+
     } catch (error) {
-        console.error('Error fetching profile data:', error);
-        return NextResponse.json(
-            { error: 'Failed to fetch profile data' },
-            { status: 500 }
-        );
+        console.error('Critical error generating profile data:', error);
+        process.exit(1);
     }
 }
+
+generateProfileData();
