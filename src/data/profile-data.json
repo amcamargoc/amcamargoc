@@ -16,7 +16,57 @@
   "metadata": {
     "email": "alberto.camargo@icloud.com",
     "linkedin": "https://www.linkedin.com/in/betocamargo/",
-    "layout": "contact-only"
+    "layout": "contact-only",
+    "projects": [
+      {
+        "name": "Muikao",
+        "slug": "muikao.md",
+        "description": "Digital Asset Ecosystem with Real-Time Analytics.",
+        "url": "https://muikao.com",
+        "screenshot": "/screenshots/muikao.png",
+        "stack": [
+          "React",
+          "Node",
+          "AWS"
+        ]
+      },
+      {
+        "name": "The Cosmic Games",
+        "slug": "the_cosmic_games.md",
+        "description": "High-performance physics engine for web applications.",
+        "url": "https://thecosmicgames.com",
+        "screenshot": "/screenshots/the_cosmic_games.png",
+        "stack": [
+          "TypeScript",
+          "WebGL",
+          "WASM"
+        ]
+      },
+      {
+        "name": "Führerschein Fragen",
+        "slug": "führerschein_fragen.md",
+        "description": "Interactive learning platform for driving licenses.",
+        "url": "https://fuhrerscheinfragen.com",
+        "screenshot": "/screenshots/fuhrerschein_fragen.png",
+        "stack": [
+          "Next.js",
+          "Tailwind",
+          "Supabase"
+        ]
+      },
+      {
+        "name": "Portfolio v2",
+        "slug": "portfolio_v2.md",
+        "description": "Neovim TUI inspired developer portfolio.",
+        "url": "https://amcamargoc.github.io",
+        "screenshot": "/screenshots/portfolio_v2.png",
+        "stack": [
+          "Next.js",
+          "Tailwind",
+          "Zustand"
+        ]
+      }
+    ]
   },
   "experienceRaw": [
     {
@@ -224,5 +274,5 @@
       "text": "Algorithms and Basic Programming"
     }
   ],
-  "generatedAt": "2026-03-16T02:55:50.886Z"
+  "generatedAt": "2026-03-16T03:22:08.086Z"
 }
