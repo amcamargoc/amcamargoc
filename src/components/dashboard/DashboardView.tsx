@@ -18,9 +18,9 @@ export default function DashboardView() {
           <AsciiLogo />
         </div>
 
-        <div className="max-w-md mb-12">
+        <div className="max-w-lg mb-12">
           <p className="text-tui-dim font-mono text-sm leading-relaxed">
-            I believe that code can transform our world for the better. I transform ideas from concept to reality and make them accessible to everyone.
+            Transforming ideas from concept to reality is a superpower
           </p>
         </div>
 
