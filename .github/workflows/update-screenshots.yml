@@ -1,0 +1,39 @@
+name: Update Project Screenshots
+
+on:
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  update-screenshots:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Install Playwright browsers
+        run: npx playwright install chromium --with-deps
+        
+      - name: Update Screenshots
+        run: npx tsx scripts/update-screenshots.ts
+        env:
+          NODE_ENV: production
+          
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/screenshots/
+          git commit -m "chore: update project screenshots [skip ci]" || echo "No changes to commit"
+          git push
