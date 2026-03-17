@@ -70,7 +70,6 @@ const FolderItem = ({
 export default function Sidebar() {
   const { openTab, activeTabId, tabs, setSidebarOpen } = useAppStore();
   const [betoExpanded, setBetoExpanded] = useState(true);
-  const [projectsExpanded, setProjectsExpanded] = useState(true);
 
   // Helper to determine if a file is active based on its path
   const isActive = (path: string) => {
@@ -99,29 +98,14 @@ export default function Sidebar() {
             <ul className="relative ml-4 border-l border-tui-gray/60 space-y-[2px]">
               <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="index.md" path="/humans/characters/beto/index.md" type="dashboard" icon={FileText} level={0} />
 
-              {/* Projects Folder */}
-              <FolderItem
-                title="projects"
-                isOpen={projectsExpanded}
-                toggle={() => setProjectsExpanded(!projectsExpanded)}
-                level={0}
-              />
-
-              {projectsExpanded && (
-                <ul className="relative ml-4 border-l border-tui-gray/60 space-y-[2px]">
-                  <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="index.md" path="/humans/characters/beto/projects/index.md" type="projects" icon={FileText} level={0} />
-                  <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="muikao.md" path="/humans/characters/beto/projects/muikao.md" type="projects" icon={FileText} level={0} />
-                  <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="führerschein_fragen.md" path="/humans/characters/beto/projects/führerschein_fragen.md" type="projects" icon={FileText} level={0} />
-                  <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="the_cosmic_games.md" path="/humans/characters/beto/projects/the_cosmic_games.md" type="projects" icon={FileText} level={0} />
-                </ul>
-              )}
-
+              <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="projects.md" path="/humans/characters/beto/projects.md" type="projects" icon={FileText} level={0} />
               <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="bio.md" path="/humans/characters/beto/bio.md" type="bio" icon={FileText} level={0} />
               <NavItem isActive={isActive} openTab={openTab} setSidebarOpen={setSidebarOpen} title="experience.md" path="/humans/characters/beto/experience.md" type="experience" icon={FileText} level={0} />
-            </ul>
-          )}
-        </ul>
-      </div>
-    </aside>
+            </ul >
+          )
+          }
+        </ul >
+      </div >
+    </aside >
   );
 }

@@ -1,5 +1,4 @@
 import { Briefcase, Code, Globe, Terminal, ExternalLink, Maximize2, X, Smartphone, Monitor } from "lucide-react";
-import { Tab } from "@/store/useAppStore";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -14,7 +13,7 @@ interface Project {
   stack: string[];
 }
 
-export default function ProjectsView({ activeTab }: { activeTab: Tab }) {
+export default function ProjectsView() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const projects: Project[] = profileData.metadata.projects || [];
 
@@ -28,9 +27,7 @@ export default function ProjectsView({ activeTab }: { activeTab: Tab }) {
     return styles[index % styles.length];
   };
 
-  const displayedProjects = activeTab.path.endsWith("projects/index.md")
-    ? projects
-    : projects.filter((p: Project) => activeTab.path.includes(p.slug));
+  const displayedProjects = projects;
 
   return (
     <div className="flex-1 overflow-y-auto p-6 md:p-12 custom-scrollbar relative">
@@ -38,11 +35,7 @@ export default function ProjectsView({ activeTab }: { activeTab: Tab }) {
         <div className="border-b border-tui-gray pb-4">
           <h1 className="text-2xl font-bold text-tui-cyan flex items-center gap-3">
             <span className="text-tui-dim">~/</span>
-            projects
-            <span className="text-tui-dim">/</span>
-            {!activeTab.path.endsWith("index.md") && (
-              <span className="text-white">{activeTab.title}</span>
-            )}
+            projects.md
           </h1>
           <p className="text-tui-dim mt-2 lowercase">ls -la --color=auto</p>
         </div>

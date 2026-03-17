@@ -88,7 +88,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
             break;
           case "p":
             e.preventDefault();
-            openTab({ type: "projects", title: "index.md", path: "/humans/character/beto/projects/index.md" });
+            openTab({ type: "projects", title: "projects.md", path: "/humans/character/beto/projects.md" });
             break;
           case "e":
             e.preventDefault();
