@@ -70,8 +70,9 @@ const FolderItem = ({
 export default function Sidebar() {
   const { openTab, activeTabId, tabs, setSidebarOpen } = useAppStore();
   const [betoExpanded, setBetoExpanded] = useState(true);
-
-  // Helper to determine if a file is active based on its path
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [projectsExpanded, setProjectsExpanded] = useState(true);
+// Helper to determine if a file is active based on its path
   const isActive = (path: string) => {
     const activeTab = tabs.find((t) => t.id === activeTabId);
     return activeTab?.path === path;
