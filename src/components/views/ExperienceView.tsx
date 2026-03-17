@@ -13,7 +13,7 @@ export default function ExperienceView() {
           role: "PDF Experience Export",
           company: "LinkedIn",
           date: "Latest",
-          textRaw: data.experienceRaw.map((e: Record<string, unknown>) => e.text).join('\n'),
+          textRaw: data.experienceRaw.map((e: any) => e.text).join('\n'),
           color: "text-tui-cyan"
         }
       ];
