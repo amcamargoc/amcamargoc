@@ -13,6 +13,8 @@ interface AppState {
   tabs: Tab[];
   activeTabId: string;
   sidebarOpen: boolean;
+  setSidebarOpen: (isOpen: boolean) => void;
+  toggleSidebar: () => void;
   openTab: (tab: Omit<Tab, "id">) => void;
   closeTab: (id: string) => void;
   setActiveTab: (id: string) => void;
@@ -28,7 +30,9 @@ const DEFAULT_TAB: Tab = {
 export const useAppStore = create<AppState>((set) => ({
   tabs: [DEFAULT_TAB],
   activeTabId: DEFAULT_TAB.id,
-  sidebarOpen: true,
+  sidebarOpen: false,
+  setSidebarOpen: (isOpen) => set({ sidebarOpen: isOpen }),
+  toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
 
   openTab: (tabData) =>
     set((state) => {

@@ -10,7 +10,7 @@ export default function AsciiLogo() {
 
   useEffect(() => {
     const words = ["ALBERTO MARIO CAMARGO CASTRO", "BETO"];
-    let timer = setTimeout(() => {
+    const timer = setTimeout(() => {
       const i = loopNum % words.length;
       const fullText = words[i];
 

@@ -1,7 +1,7 @@
 "use client";
 
-import { User, Mail, Github, Linkedin, Terminal, Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { User, Mail, Github, Linkedin } from "lucide-react";
+import { useState } from "react";
 import * as simpleIcons from "simple-icons";
 
 // Helper to map GitHub language strings to simple-icons keys
@@ -27,7 +27,7 @@ const getIconSvg = (language: string) => {
   // simple-icons exports are prefixed with 'si' and capitalized, e.g. siJavascript
   const exportName = `si${iconKey.charAt(0).toUpperCase()}${iconKey.slice(1)}`;
 
-  // @ts-ignore - dynamic lookup on imported library
+  // @ts-expect-error - dynamic lookup on imported library
   const icon = simpleIcons[exportName];
 
   return icon ? icon.svg : null;

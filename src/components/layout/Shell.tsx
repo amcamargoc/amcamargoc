@@ -4,11 +4,33 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Sidebar from "./Sidebar";
 import TabBar from "./TabBar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppStore } from "@/store/useAppStore";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Shell({ children }: { children: React.ReactNode }) {
-  const { openTab, closeTab, activeTabId, tabs, setActiveTab } = useAppStore();
+  const { openTab, closeTab, activeTabId, tabs, setActiveTab, sidebarOpen, setSidebarOpen } = useAppStore();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) {
+        setSidebarOpen(true);
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [setSidebarOpen]);
+
+  useEffect(() => {
+    if (isMobile && sidebarOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isMobile, sidebarOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -82,14 +104,43 @@ export default function Shell({ children }: { children: React.ReactNode }) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [activeTabId, closeTab, openTab, tabs]);
+  }, [activeTabId, closeTab, openTab, tabs, setActiveTab]);
 
   return (
-    <div className="flex flex-col h-screen w-screen overflow-hidden bg-tui-bg">
+    <div className="flex flex-col h-[100dvh] w-screen overflow-hidden bg-tui-bg relative">
       <Header />
-      <div className="flex flex-1 overflow-hidden min-h-0">
-        <Sidebar />
-        <main className="flex-1 flex flex-col min-w-0 bg-black overflow-hidden relative">
+      <div className="flex flex-1 overflow-hidden min-h-0 relative">
+        <AnimatePresence>
+          {isMobile && sidebarOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm md:hidden"
+            />
+          )}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {(sidebarOpen || !isMobile) && (
+            <motion.div
+              initial={isMobile ? { x: "-100%" } : { x: 0 }}
+              animate={{ x: 0 }}
+              exit={isMobile ? { x: "-100%" } : { x: 0 }}
+              transition={{ type: "spring", bounce: 0, duration: 0.3 }}
+              className={`${
+                isMobile
+                  ? "fixed inset-y-0 left-0 z-[100] shadow-2xl shadow-tui-magenta/20"
+                  : "relative flex shrink-0 border-r border-tui-gray"
+              } h-full bg-black`}
+            >
+              <Sidebar />
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <main className="flex-1 flex flex-col min-w-0 bg-black overflow-hidden relative z-0">
           <TabBar />
           {children}
         </main>
