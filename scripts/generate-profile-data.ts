@@ -23,10 +23,10 @@ async function generateProfileData() {
 
         const languagesMap: Record<string, number> = {};
         if (reposRes.ok) {
-            const repos = await reposRes.json() as any[];
-            repos.forEach((repo: any) => {
+            const repos = await reposRes.json() as Record<string, unknown>[];
+            repos.forEach((repo: Record<string, unknown>) => {
                 if (repo.language) {
-                    languagesMap[repo.language] = (languagesMap[repo.language] || 0) + 1;
+                    languagesMap[repo.language as string] = (languagesMap[repo.language as string] || 0) + 1;
                 }
             });
         }
@@ -38,7 +38,7 @@ async function generateProfileData() {
             .map(([lang]) => lang);
 
         // 3. Fetch Metadata (Check multiple local paths, then GitHub)
-        let extractedMetadata: any = {};
+        let extractedMetadata: Record<string, unknown> = {};
         const localPaths = [
             path.join(process.cwd(), 'src', 'metadata.json'),
             path.join(process.cwd(), 'metadata.json')
@@ -64,7 +64,7 @@ async function generateProfileData() {
         }
 
         // 4. Parse LinkedIn PDF locally
-        let experienceData: any[] = [];
+        let experienceData: Record<string, unknown>[] = [];
         try {
             const pdfPath = path.join(process.cwd(), 'public', 'linkedin_profile.pdf');
             if (fs.existsSync(pdfPath)) {

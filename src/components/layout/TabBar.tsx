@@ -4,10 +4,17 @@ import { useAppStore } from "@/store/useAppStore";
 import { X } from "lucide-react";
 
 export default function TabBar() {
-  const { tabs, activeTabId, setActiveTab, closeTab } = useAppStore();
+  const { tabs, activeTabId, setActiveTab, closeTab, toggleSidebar } = useAppStore();
 
   return (
-    <div className="flex bg-black border-b border-tui-gray overflow-x-auto custom-scrollbar shrink-0 h-8">
+    <div className="flex bg-black border-b border-tui-gray overflow-x-auto custom-scrollbar shrink-0 h-8 relative">
+      <button
+        onClick={toggleSidebar}
+        className="md:hidden px-4 py-1 border-r border-tui-gray flex items-center justify-center gap-2 text-[11px] cursor-pointer hover:bg-white/10 text-tui-magenta transition-colors whitespace-nowrap sticky left-0 z-10 bg-black"
+        aria-label="Toggle Menu"
+      >
+        <span className="font-bold tracking-widest">:::MENU:::</span>
+      </button>
       {tabs.map((tab, index) => {
         const isActive = tab.id === activeTabId;
 
