@@ -7,7 +7,22 @@
 - Network:       http://192.168.0.2:3000
 
 ✓ Starting...
-✓ Ready in 1008ms
+✓ Ready in 1079ms
 ○ Compiling / ...
- GET / 200 in 8.0s (compile: 7.5s, render: 496ms)
- GET / 200 in 78ms (compile: 10ms, render: 67ms)
+ GET / 200 in 7.9s (compile: 6.8s, render: 1072ms)
+ GET / 200 in 87ms (compile: 8ms, render: 78ms)
+ GET / 200 in 77ms (compile: 6ms, render: 71ms)
+ GET / 200 in 184ms (compile: 11ms, render: 174ms)
+ GET / 200 in 111ms (compile: 6ms, render: 105ms)
+ GET / 200 in 92ms (compile: 5ms, render: 87ms)
+ GET / 200 in 128ms (compile: 5ms, render: 122ms)
+ GET / 200 in 109ms (compile: 10ms, render: 99ms)
+ GET / 200 in 124ms (compile: 8ms, render: 115ms)
+ GET / 200 in 75ms (compile: 5ms, render: 70ms)
+ GET / 200 in 84ms (compile: 7ms, render: 77ms)
+ GET / 200 in 89ms (compile: 6ms, render: 82ms)
+ GET / 200 in 132ms (compile: 8ms, render: 125ms)
+ GET /screenshots/the_cosmic_games.png 404 in 1142ms (compile: 878ms, render: 264ms)
+ GET /screenshots/portfolio_v2.png 404 in 1138ms (compile: 926ms, render: 212ms)
+ GET /screenshots/fuhrerschein_fragen.png 404 in 1143ms (compile: 901ms, render: 241ms)
+ GET /screenshots/muikao.png 404 in 1153ms (compile: 967ms, render: 186ms)
