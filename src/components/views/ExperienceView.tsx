@@ -6,17 +6,15 @@ import profileData from "@/data/profile-data.json";
 
 export default function ExperienceView() {
   const getInitialExperiences = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const data = profileData as any;
-    if (data.experienceRaw && data.experienceRaw.length > 0) {
-      return [
-        {
-          role: "PDF Experience Export",
-          company: "LinkedIn",
-          date: "Latest",
-          textRaw: data.experienceRaw.map((e: any) => e.text).join('\n'),
-          color: "text-tui-cyan"
-        }
-      ];
+    if (data.experiences && data.experiences.length > 0) {
+      const colors = ["text-tui-cyan", "text-tui-magenta", "text-white"];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      return data.experiences.map((exp: any, i: number) => ({
+        ...exp,
+        color: colors[i % colors.length]
+      }));
     }
     return [
       {
@@ -43,6 +41,7 @@ export default function ExperienceView() {
     ];
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [experiences] = useState<any[]>(getInitialExperiences());
 
   return (
@@ -57,7 +56,7 @@ export default function ExperienceView() {
         <div className="relative border-l-2 border-tui-gray/30 pl-8 ml-4 md:ml-0 space-y-16 py-4">
           {experiences.map((exp, i) => (
             <div key={i} className="relative group">
-              <div className={`absolute -left-[41px] top-1 bg-black p-1 rounded-full border border-tui-gray group-hover:border-white transition-colors`}>
+              <div className={`absolute -left-[41px] top-1 bg-black p-1 rounded-full border border-tui-gray/50 group-hover:border-white transition-colors`}>
                 <GitCommitHorizontal size={18} className={exp.color} />
               </div>
 
@@ -77,9 +76,11 @@ export default function ExperienceView() {
                   @{exp.company}
                 </div>
 
-                <p className="text-tui-dim text-sm leading-relaxed max-w-2xl border-l border-tui-gray/30 pl-4 whitespace-pre-wrap font-mono">
-                  {exp.textRaw ? exp.textRaw : exp.desc}
-                </p>
+                {(exp.description || exp.desc) && (
+                  <p className="text-tui-dim text-sm leading-relaxed max-w-2xl border-l border-tui-gray/30 pl-4 whitespace-pre-wrap font-mono">
+                    {String(exp.description || exp.desc)}
+                  </p>
+                )}
 
                 <div className="mt-4 flex gap-6 text-[10px] text-tui-gray">
                   <span>1 file changed, {i * 123 + 45} insertions(+)</span>

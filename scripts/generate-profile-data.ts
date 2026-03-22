@@ -64,7 +64,7 @@ async function generateProfileData() {
         }
 
         // 4. Parse LinkedIn PDF locally
-        let experienceData: any[] = [];
+        let experiences: any[] = [];
         try {
             const pdfPath = path.join(process.cwd(), 'public', 'linkedin_profile.pdf');
             if (fs.existsSync(pdfPath)) {
@@ -88,11 +88,73 @@ async function generateProfileData() {
                         eduIndex !== -1 ? eduIndex : cleanText.length
                     );
 
-                    const lines = experienceChunk.split('\n').map((l: string) => l.trim()).filter(Boolean);
-                    experienceData = lines.map((line: string, i: number) => ({
-                        id: i,
-                        text: line
-                    }));
+                    const lines = experienceChunk.split('\n').map((l: string) => l.trim()).filter((l: string) => l.length > 0);
+                    const cleanedLines = lines.filter((line: string) => {
+                        return !line.match(/^Page \d+ of \d+$/) && !line.match(/^-+Page \(\d+\) Break-+$/);
+                    });
+
+                    let currentExp: any = null;
+                    for (let i = 0; i < cleanedLines.length; i++) {
+                        const line = cleanedLines[i];
+                        // Match date like "January 2026 - March 2026 (3 months)"
+                        const dateMatch = line.match(/^([a-zA-Z]+ \d{4}.*\(.*(month|year).*\))/i);
+                        if (dateMatch) {
+                            if (currentExp) {
+                                currentExp.description = currentExp.description.join(' ').trim();
+                                experiences.push(currentExp);
+                            }
+                            const date = line;
+                            let role = "";
+                            let company = "";
+                            if (i >= 1) {
+                                role = cleanedLines[i - 1];
+                            }
+                            if (i >= 2) {
+                                company = cleanedLines[i - 2];
+                            }
+
+                            currentExp = {
+                                role,
+                                company,
+                                date,
+                                description: []
+                            };
+                        } else if (currentExp) {
+                            // Check if line is the next company or role by looking ahead
+                            let isNextCompanyOrRole = false;
+                            if (i + 1 < cleanedLines.length && cleanedLines[i+1].match(/^([a-zA-Z]+ \d{4}.*\(.*(month|year).*\))/i)) {
+                                isNextCompanyOrRole = true;
+                            } else if (i + 2 < cleanedLines.length && cleanedLines[i+2].match(/^([a-zA-Z]+ \d{4}.*\(.*(month|year).*\))/i)) {
+                                isNextCompanyOrRole = true;
+                            }
+
+                            if (isNextCompanyOrRole) {
+                                continue;
+                            }
+
+                            // Exclude URLs
+                            if (line.startsWith('http://') || line.startsWith('https://')) {
+                                continue;
+                            }
+                            // Exclude location lines
+                            if (line.length < 50 && line.includes(',')) {
+                                const parts = line.split(',');
+                                if (parts.length === 2 && parts[1].trim().length < 20) {
+                                    continue;
+                                }
+                            }
+                            const commonLocations = ['Germany', 'United States', 'Colombia', 'Berlín, Alemania', 'Berlín y alrededores, Alemania', 'Berlin', 'Deutschland'];
+                            if (commonLocations.includes(line)) {
+                                continue;
+                            }
+
+                            currentExp.description.push(line);
+                        }
+                    }
+                    if (currentExp) {
+                        currentExp.description = currentExp.description.join(' ').trim();
+                        experiences.push(currentExp);
+                    }
                 }
             }
         } catch (pdfErr) {
@@ -108,7 +170,7 @@ async function generateProfileData() {
             },
             techStack: topLanguages.length > 0 ? topLanguages : ['TypeScript', 'React', 'Node.js'],
             metadata: extractedMetadata,
-            experienceRaw: experienceData,
+            experiences: experiences,
             generatedAt: new Date().toISOString()
         };
 
