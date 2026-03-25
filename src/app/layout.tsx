@@ -15,6 +15,10 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Portfolio | Beto",
   description: "software engineer. contact Alberto Mario Camargo Castro",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({

@@ -33,9 +33,9 @@ async function updateScreenshots() {
     await desktopPage.evaluate(async () => {
       await new Promise((resolve) => {
         let totalHeight = 0;
-        let distance = 100;
-        let timer = setInterval(() => {
-          let scrollHeight = document.body.scrollHeight;
+        const distance = 100;
+        const timer = setInterval(() => {
+          const scrollHeight = document.body.scrollHeight;
           window.scrollBy(0, distance);
           totalHeight += distance;
           if (totalHeight >= scrollHeight) {
