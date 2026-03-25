@@ -64,7 +64,7 @@ async function generateProfileData() {
         }
 
         // 4. Parse LinkedIn PDF locally
-        let experiences: any[] = [];
+        const experiences: any[] = [];
         try {
             const pdfPath = path.join(process.cwd(), 'public', 'linkedin_profile.pdf');
             if (fs.existsSync(pdfPath)) {
