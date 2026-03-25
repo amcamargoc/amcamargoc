@@ -79,13 +79,13 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex flex-col shrink-0 bg-black h-full w-full md:w-[260px] overflow-hidden">
-      <div className="p-3 text-tui-cyan text-xs flex items-center gap-2 border-b border-tui-gray shrink-0 min-w-full md:min-w-[260px]">
+    <aside className="flex flex-col shrink-0 bg-black h-full w-full md:w-sidebar overflow-hidden">
+      <div className="h-8 px-4 text-tui-cyan text-tui-sm flex items-center gap-2 border-b border-tui-gray shrink-0 min-w-full md:min-w-sidebar">
         <Folder size={12} className="shrink-0" />
         <span className="font-bold">EXPLORER</span>
       </div>
 
-      <div className="flex-1 p-2 text-[12px] overflow-y-auto custom-scrollbar min-w-full md:min-w-[260px]">
+      <div className="flex-1 p-2 text-tui-base overflow-y-auto custom-scrollbar min-w-full md:min-w-sidebar">
         <ul className="space-y-[2px] font-medium w-full">
           {/* Root Folder: /humans/characters/beto/ */}
           <FolderItem

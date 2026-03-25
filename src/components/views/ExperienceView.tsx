@@ -82,7 +82,7 @@ export default function ExperienceView() {
                   </p>
                 )}
 
-                <div className="mt-4 flex gap-6 text-[10px] text-tui-gray">
+                <div className="mt-4 flex gap-6 text-tui-xs text-tui-gray">
                   <span>1 file changed, {i * 123 + 45} insertions(+)</span>
                 </div>
               </div>

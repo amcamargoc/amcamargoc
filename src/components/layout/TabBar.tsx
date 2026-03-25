@@ -10,7 +10,7 @@ export default function TabBar() {
     <div className="flex bg-black border-b border-tui-gray overflow-x-auto custom-scrollbar shrink-0 h-8 relative">
       <button
         onClick={toggleSidebar}
-        className="md:hidden px-4 py-1 border-r border-tui-gray flex items-center justify-center gap-2 text-[11px] cursor-pointer hover:bg-white/10 text-tui-magenta transition-colors whitespace-nowrap sticky left-0 z-10 bg-black"
+        className="md:hidden px-4 py-1 border-r border-tui-gray flex items-center justify-center gap-2 text-tui-sm cursor-pointer hover:bg-white/10 text-tui-magenta transition-colors whitespace-nowrap sticky left-0 z-10 bg-black"
         aria-label="Toggle Menu"
       >
         <span className="font-bold tracking-widest">:::MENU:::</span>
@@ -22,7 +22,7 @@ export default function TabBar() {
           <div
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-1 border-r border-tui-gray flex items-center gap-2 text-[11px] cursor-pointer hover:bg-tui-gray/20 transition-colors whitespace-nowrap min-w-max ${
+            className={`px-4 py-1 border-r border-tui-gray flex items-center gap-2 text-tui-sm cursor-pointer hover:bg-tui-gray/20 transition-colors whitespace-nowrap min-w-max ${
               isActive
                 ? "bg-tui-gray/30 text-tui-cyan"
                 : "text-tui-dim"

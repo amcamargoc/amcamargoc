@@ -2,7 +2,7 @@ import { Github } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="h-6 flex items-center text-[11px] font-bold shrink-0 w-full bg-black border-t border-tui-gray">
+    <footer className="h-6 flex items-center text-tui-sm font-bold shrink-0 w-full bg-black border-t border-tui-gray">
       <div className="flex-1 px-4 h-full flex items-center overflow-hidden">
         <div className="text-tui-dim flex items-center gap-2 truncate">
           <span>:</span>

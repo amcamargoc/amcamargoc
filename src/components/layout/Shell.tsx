@@ -144,7 +144,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         <main className="flex-1 flex flex-col min-w-0 bg-black overflow-hidden relative z-0">
           {shellMode === "normal" && <TabBar />}
           {shellMode === "minimized" ? (
-            <div className="flex-1 flex items-center justify-center text-tui-dim text-[11px]">
+            <div className="flex-1 flex items-center justify-center text-tui-dim text-tui-sm">
               <span className="tracking-widest">[ MINIMIZED ]</span>
             </div>
           ) : (

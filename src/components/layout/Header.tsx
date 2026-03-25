@@ -50,7 +50,7 @@ export default function Header() {
       <div className="absolute left-1/2 -translate-x-1/2 pointer-events-none flex items-center">
         <span
           ref={titleRef}
-          className={`whitespace-nowrap text-[13px] font-semibold transition-opacity duration-200 ${
+          className={`whitespace-nowrap text-tui-lg font-semibold transition-opacity duration-200 ${
             isTitleVisible ? "opacity-100" : "opacity-0"
           } text-tui-dim`}
         >
