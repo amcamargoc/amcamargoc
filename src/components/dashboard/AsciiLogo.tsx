@@ -35,11 +35,11 @@ export default function AsciiLogo() {
   }, [text, isDeleting, loopNum, typingSpeed]);
 
   return (
-    <div className="mb-8 flex flex-col items-center">
-      <h1 className="text-white font-bold text-base md:text-xl font-mono tracking-[0.15em] uppercase text-center flex items-center h-8">
-        <span className="text-tui-cyan mr-3">&gt;</span>
+    <div className="mb-8 flex flex-col items-center w-full max-w-full overflow-hidden px-1">
+      <h1 className="text-white font-bold text-tui-fluid-logo font-mono tracking-tight md:tracking-tui-wide uppercase text-center flex items-center justify-center whitespace-nowrap w-full min-h-8">
+        <span className="text-tui-cyan mr-1 sm:mr-3">&gt;</span>
         {text}
-        <span className="w-2 h-5 bg-tui-magenta inline-block mx-1 animate-pulse" />
+        <span className="w-1.5 sm:w-2 h-4 sm:h-5 bg-tui-magenta inline-block mx-1 animate-pulse" />
       </h1>
     </div>
   );

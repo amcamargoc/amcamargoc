@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 @theme {
+  --text-tui-micro: 8px;
+  --text-tui-xs: 10px;
+  --text-tui-sm: 11px;
+  --text-tui-base: 12px;
+  --text-tui-fluid-logo: clamp(8px, 3.5vw, 18px);
+  --tracking-tui-wide: 0.15em;
+  
   --color-tui-bg: #000000;
   --color-tui-cyan: #00ffff;
   --color-tui-magenta: #ff00ff;
@@ -8,15 +15,6 @@
   --color-tui-dim: #666666;
   --font-mono: var(--font-jetbrains-mono), monospace;
   --font-sans: var(--font-inter), sans-serif;
-
-  /* Typography */
-  --text-tui-xs: 10px;
-  --text-tui-sm: 11px;
-  --text-tui-base: 12px;
-  --text-tui-lg: 13px;
-
-  /* Layout */
-  --spacing-sidebar: 260px;
 }
 
 @layer base {

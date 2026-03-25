@@ -43,7 +43,6 @@ export default function ProjectsView() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
           {displayedProjects.map((p: Project, i: number) => {
             const { icon, color } = getIconAndColor(i);
-            const desktopSrc = p.screenshot.replace("-hero.png", "-desktop.png");
 
             return (
               <div
@@ -78,14 +77,14 @@ export default function ProjectsView() {
                       {icon}
                       <h3 className="font-bold text-white group-hover:underline decoration-tui-cyan underline-offset-4">{p.slug}</h3>
                     </div>
-                    <span className="text-tui-xs text-tui-dim">rwxr-xr-x</span>
+                    <span className="text-[10px] text-tui-dim">rwxr-xr-x</span>
                   </div>
 
                   <p className="text-xs text-tui-dim mb-4 lowercase flex-1 leading-relaxed line-clamp-2">{p.description}</p>
 
                   <div className="flex flex-wrap gap-2 mb-4">
                     {p.stack.map((s: string) => (
-                      <span key={s} className="text-tui-xs bg-tui-gray/40 px-2 py-1 text-white border border-tui-gray font-mono">
+                      <span key={s} className="text-[10px] bg-tui-gray/40 px-2 py-1 text-white border border-tui-gray font-mono">
                         {s}
                       </span>
                     ))}
