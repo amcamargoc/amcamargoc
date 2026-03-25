@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 export type ViewType = "dashboard" | "bio" | "projects" | "experience";
+export type ShellMode = "normal" | "minimized" | "maximized";
 
 export interface Tab {
   id: string;
@@ -13,11 +14,13 @@ interface AppState {
   tabs: Tab[];
   activeTabId: string;
   sidebarOpen: boolean;
+  shellMode: ShellMode;
   setSidebarOpen: (isOpen: boolean) => void;
   toggleSidebar: () => void;
   openTab: (tab: Omit<Tab, "id">) => void;
   closeTab: (id: string) => void;
   setActiveTab: (id: string) => void;
+  setShellMode: (mode: ShellMode) => void;
 }
 
 const DEFAULT_TAB: Tab = {
@@ -31,8 +34,10 @@ export const useAppStore = create<AppState>((set) => ({
   tabs: [DEFAULT_TAB],
   activeTabId: DEFAULT_TAB.id,
   sidebarOpen: false,
+  shellMode: "normal",
   setSidebarOpen: (isOpen) => set({ sidebarOpen: isOpen }),
   toggleSidebar: () => set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+  setShellMode: (mode) => set({ shellMode: mode }),
 
   openTab: (tabData) =>
     set((state) => {

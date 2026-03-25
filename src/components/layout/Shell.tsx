@@ -9,28 +9,29 @@ import { useAppStore } from "@/store/useAppStore";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function Shell({ children }: { children: React.ReactNode }) {
-  const { openTab, closeTab, activeTabId, tabs, setActiveTab, sidebarOpen, setSidebarOpen } = useAppStore();
+  const { openTab, closeTab, activeTabId, tabs, setActiveTab, sidebarOpen, setSidebarOpen, shellMode } = useAppStore();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
-      if (window.innerWidth >= 768) {
+      if (window.innerWidth >= 768 && shellMode === "normal") {
         setSidebarOpen(true);
       }
     };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [setSidebarOpen]);
+  }, [setSidebarOpen, shellMode]);
 
   useEffect(() => {
-    if (isMobile && sidebarOpen) {
+    // Only lock scrolling while the mobile sidebar overlay is visible.
+    if (shellMode === "normal" && isMobile && sidebarOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "auto";
     }
-  }, [isMobile, sidebarOpen]);
+  }, [isMobile, sidebarOpen, shellMode]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -111,7 +112,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
       <Header />
       <div className="flex flex-1 overflow-hidden min-h-0 relative">
         <AnimatePresence>
-          {isMobile && sidebarOpen && (
+          {shellMode === "normal" && isMobile && sidebarOpen && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -123,7 +124,7 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
 
         <AnimatePresence>
-          {(sidebarOpen || !isMobile) && (
+          {shellMode === "normal" && (sidebarOpen || !isMobile) && (
             <motion.div
               initial={isMobile ? { x: "-100%" } : { x: 0 }}
               animate={{ x: 0 }}
@@ -141,11 +142,17 @@ export default function Shell({ children }: { children: React.ReactNode }) {
         </AnimatePresence>
 
         <main className="flex-1 flex flex-col min-w-0 bg-black overflow-hidden relative z-0">
-          <TabBar />
-          {children}
+          {shellMode === "normal" && <TabBar />}
+          {shellMode === "minimized" ? (
+            <div className="flex-1 flex items-center justify-center text-tui-dim text-[11px]">
+              <span className="tracking-widest">[ MINIMIZED ]</span>
+            </div>
+          ) : (
+            children
+          )}
         </main>
       </div>
-      <Footer />
+      {shellMode === "normal" && <Footer />}
     </div>
   );
 }
