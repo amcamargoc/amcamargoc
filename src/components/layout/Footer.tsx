@@ -6,7 +6,6 @@ export default function Footer() {
       <div className="flex-1 px-4 h-full flex items-center overflow-hidden">
         <div className="text-tui-dim flex items-center gap-2 truncate">
           <span>:</span>
-          <span className="text-white">Telescope find_files</span>
           <div className="cursor-block shrink-0"></div>
         </div>
       </div>
