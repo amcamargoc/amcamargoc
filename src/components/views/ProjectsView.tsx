@@ -47,12 +47,12 @@ export default function ProjectsView() {
             return (
               <div
                 key={i}
-                className={`border ${color} bg-black rounded-sm transition-all duration-300 hover:bg-white/5 group flex flex-col overflow-hidden`}
+                className={`border ${color} bg-black rounded-sm transition-all duration-300 hover:bg-white/5 group flex flex-col overflow-hidden cursor-pointer`}
+                onClick={() => setSelectedProject(p)}
               >
                 {/* Hero Section Preview */}
                 <div
                   className="relative w-full h-44 overflow-hidden bg-tui-gray/20 cursor-zoom-in group/hero"
-                  onClick={() => setSelectedProject(p)}
                 >
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-all z-20 duration-500 flex items-center justify-center">
                     <Maximize2 className="text-white opacity-0 group-hover:opacity-100 transition-opacity scale-90 group-hover:scale-100 duration-300" size={32} />
@@ -90,16 +90,17 @@ export default function ProjectsView() {
                     ))}
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="w-full mt-auto pt-4">
                     <a
                       href={p.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-2 text-xs text-tui-cyan hover:text-white transition-colors border border-transparent hover:border-tui-cyan/50 p-2 -ml-2 rounded w-fit group/btn"
+                      className="w-full flex items-center justify-center gap-2 text-tui-xs font-mono uppercase tracking-widest bg-black text-tui-cyan border border-tui-gray hover:border-tui-cyan/50 hover:bg-white/5 transition-all px-3 py-2 rounded-sm group/btn"
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      <span className="text-tui-magenta">./</span>
+                      <span className="text-tui-magenta mr-[-4px] opacity-70 group-hover/btn:opacity-100 transition-opacity">./</span>
                       execute
-                      <ExternalLink size={12} className="opacity-50 group-hover/btn:opacity-100" />
+                      <ExternalLink size={10} className="opacity-50 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                     </a>
                   </div>
                 </div>
@@ -124,9 +125,17 @@ export default function ProjectsView() {
                 <h2 className="text-xl font-bold text-white flex items-center gap-3">
                   <span className="text-tui-magenta">/</span>
                   {selectedProject.name}
-                  <span className="text-tui-dim text-xs font-normal">.inspect()</span>
+                  <span className="text-tui-dim text-xs font-normal hidden sm:inline">.inspect()</span>
                 </h2>
-                <p className="text-xs text-tui-dim font-mono">{selectedProject.url}</p>
+                <a 
+                  href={selectedProject.url} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="text-xs text-tui-cyan hover:text-white font-mono flex items-center gap-2 underline decoration-tui-cyan/50 hover:decoration-white transition-colors mt-1 w-fit"
+                >
+                  {selectedProject.url}
+                  <ExternalLink size={10} />
+                </a>
               </div>
               <button
                 onClick={() => setSelectedProject(null)}
