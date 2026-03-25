@@ -19,26 +19,23 @@
     "layout": "contact-only",
     "projects": [
       {
-        "name": "Mokao",
-        "slug": "mokao",
-        "description": "sustainable premium cacao platform connecting colombian farmers to global markets.",
-        "url": "https://mokoa.vercel.app/",
-        "screenshot": "/screenshots/mokao-hero.png",
+        "name": "Muikao",
+        "slug": "muikao.md",
+        "description": "Digital Asset Ecosystem with Real-Time Analytics.",
+        "url": "https://muikao.com",
+        "screenshot": "/screenshots/muikao.png",
         "stack": [
           "React",
-          "Next.js",
-          "Vercel",
-          "Typescript",
-          "Tailwind",
-          "Node.js"
+          "Node",
+          "AWS"
         ]
       },
       {
-        "name": "The Cosmic Game",
-        "slug": "the-cosmic-game",
-        "description": "a soul-level quest where trauma is the invitation and healing is sacred play.",
-        "url": "https://the-cosmic-game.vercel.app/",
-        "screenshot": "/screenshots/the-cosmic-game-hero.png",
+        "name": "The Cosmic Games",
+        "slug": "the_cosmic_games.md",
+        "description": "High-performance physics engine for web applications.",
+        "url": "https://thecosmicgames.com",
+        "screenshot": "/screenshots/the_cosmic_games.png",
         "stack": [
           "TypeScript",
           "WebGL",
@@ -47,10 +44,22 @@
       },
       {
         "name": "Führerschein Fragen",
-        "slug": "führerschein-fragen",
-        "description": "interactive learning platform for driving licenses with a seamless, frictionless journey.",
-        "url": "https://fuehrerschein-fragen.vercel.app/",
-        "screenshot": "/screenshots/führerschein-fragen-hero.png",
+        "slug": "führerschein_fragen.md",
+        "description": "Interactive learning platform for driving licenses.",
+        "url": "https://fuhrerscheinfragen.com",
+        "screenshot": "/screenshots/fuhrerschein_fragen.png",
+        "stack": [
+          "Next.js",
+          "Tailwind",
+          "Supabase"
+        ]
+      },
+      {
+        "name": "Portfolio v2",
+        "slug": "portfolio_v2.md",
+        "description": "Neovim TUI inspired developer portfolio.",
+        "url": "https://amcamargoc.github.io",
+        "screenshot": "/screenshots/portfolio_v2.png",
         "stack": [
           "Next.js",
           "Tailwind",
@@ -64,31 +73,31 @@
       "role": "Founding Software Engineer",
       "company": "Mondu",
       "date": "January 2022 - August 2024 (2 years 8 months)",
-      "description": "FinTech - Buy Now, Pay Later solution for merchants and private users"
+      "description": "FinTech - Buy Now, Pay Later solution for merchants and private users - Migration of processes  from monolith to event-driven architecture - Design and implement system like auto/manual reconciliation, invoices notifications, scheduling task to check for due invoices, dispute invoices, direct - Implement  multiple features using Ruby on Rails, Typescript and ReactJS - Migrate RSpec Tests to a load testing tool (K6) in Javascript and integrate them into our development pipelines - Participate in discussions with product and tech team about new features - Mentoring/collaborate new developers and frontend developers to understand and get involved in  our internal systems"
     },
     {
       "role": "Software Engineer",
       "company": "Vehiculum",
       "date": "November 2017 - December 2021  (4 years 2 months)",
-      "description": "Digital leasing platform"
+      "description": "Digital leasing platform - Built, deployed and migrated  from monolith to microservices on AWS (EC2, - Lead Automatization of Zoho CRM processes to reduce manual work and improve sales team efficiency. - Leading automatization of Zoho CRM to  improve sales team efficiency. - Developed features in Ruby on Rails, typescript, vuejs, react,  including fleet management, admin, and car dealer dashboards, lease car configurations, internationalization,  A/B testing, SEO features, and data scraping. - Collaborated with the product team on requirement estimation and refinement - Monitored and resolved bugs using Datadog and New Relic. - Mentored junior developers. - Use agile methodologies like Kanban to Scrum."
     },
     {
       "role": "Back End Developer",
       "company": "Big Mike Alright UG (haftungsbeschränkt)",
       "date": "January 2017 - December 2017 (1 year)",
-      "description": "Iphone app for fitness. Building API was my focus"
+      "description": ""
     },
     {
       "role": "Junior Web Developer",
       "company": "Atom Labs",
       "date": "May 2016 - March 2017 (11 months)",
-      "description": "My first freelancer job"
+      "description": "In my final year of university, I began working as a freelance developer, where I gained experience using English in a professional environment. I contributed to maintaining and developing features for a Ruby on Rails monolithic application, working across the full stack—from user interface design to troubleshooting and problem-solving"
     },
     {
       "role": "Software Engineer",
       "company": "Autónomo",
       "date": "July 2015 - November 2016 (1 year 5 months)",
-      "description": "In university times, my friends and I had a lot fun developing software. We worked on personal projects and even got a few contracts from clients."
+      "description": "In university times, my friends and I had a lot fun developing software. We worked on personal projects and even got a few contracts from clients. Two projects that we managed to release to specific clients were: - Susy: A tool for IT support and maintenance used by a school in Barranquilla. - Frepi: An eCommerce project aimed at making it easier for farmers to sell directly to consumers."
     },
     {
       "role": "Mentor",
@@ -97,5 +106,5 @@
       "description": "Led classes, created assessments, and offered guidance to help students enhance their programming skills in courses such as: Data Structures & Algorithms and Basic Programming"
     }
   ],
-  "generatedAt": "2026-03-22T16:47:36.664Z"
+  "generatedAt": "2026-03-25T12:27:42.751Z"
 }
