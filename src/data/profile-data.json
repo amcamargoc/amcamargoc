@@ -48,8 +48,8 @@
       {
         "name": "Führerschein Fragen",
         "slug": "führerschein-fragen",
-        "description": "interactive learning platform for driving licenses with a seamless, frictionless journey.",
-        "url": "https://fuehrerschein-fragen.vercel.app/",
+        "description": "Learn for your driving license test in Germany",
+        "url": "https://driving-license.beto.world/",
         "screenshot": "/screenshots/führerschein-fragen-hero.png",
         "stack": [
           "Next.js",
